@@ -37,14 +37,14 @@ export class FriendAdder extends React.Component {
   }
 
   onFriendAdd = () => {
-    if (this.state.nameValue.length && this.state.ageValue.length) {
+    if (this.state.nameValue && this.state.ageValue) {
       this.props.addFriend(this.state.nameValue, this.state.ageValue);
       this.clearInputs();
     }
   }
 
   onFriendUpdate = () => {
-    if (this.state.nameValue.length && this.state.ageValue.length) {
+    if (this.state.nameValue && this.state.ageValue) {
       this.props.updateFriend(
         this.props.currentFriend.id,
         this.state.nameValue,
