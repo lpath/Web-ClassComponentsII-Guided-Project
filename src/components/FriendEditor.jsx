@@ -6,7 +6,7 @@ const initialState = {
   ageValue: '',
 };
 
-export class FriendAdder extends React.Component {
+export class FriendEditor extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,16 +19,16 @@ export class FriendAdder extends React.Component {
   }
 
   clearInputs = () => {
-    // implement
+    // implement with setState
   }
 
   onNameChange = event => {
-    // implement
+    // implement with setState
   }
 
   onAgeChange = event => {
     if (Number(event.target.value)) {
-      // implement
+      // implement with setState
     }
   }
 
@@ -82,4 +82,4 @@ export class FriendAdder extends React.Component {
   }
 }
 
-export default FriendAdder;
+export default FriendEditor;

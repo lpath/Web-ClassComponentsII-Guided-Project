@@ -17,15 +17,16 @@ class Container extends React.Component {
   state = initialState
 
   addFriend = (name, age) => {
-    // add a new friend object to `state.friends`
+    // add a new friend object to `state.friends` using setState
   }
 
   updateFriend = (id, name, age) => {
     // update an existing friend (the `id` tells us which friend to update)
+    // using setState
   }
 
   deleteFriend = id => {
-    // 1- delete an existing friend (the `id` tells us which)
+    // 1- delete an existing friend (the `id` tells us which) using setState
     // 2- also set currentFriendId to null
   }
 
