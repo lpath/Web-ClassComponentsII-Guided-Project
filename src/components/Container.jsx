@@ -25,7 +25,8 @@ class Container extends React.Component {
   }
 
   deleteFriend = id => {
-    // delete an existing friend (the `id` tells us which)
+    // 1- delete an existing friend (the `id` tells us which)
+    // 2- also set currentFriendId to null
   }
 
   setCurrentFriendId = id => {
