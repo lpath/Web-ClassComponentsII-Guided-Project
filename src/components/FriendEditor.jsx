@@ -6,7 +6,7 @@ const initialState = {
   ageValue: '',
 };
 
-export class FriendAdder extends React.Component {
+export class FriendEditor extends React.Component {
   constructor(props) {
     super(props);
 
@@ -38,20 +38,25 @@ export class FriendAdder extends React.Component {
 
   onFriendAdd = () => {
     if (this.state.nameValue && this.state.ageValue) {
+      // alter the state of the app!!
       this.props.addFriend(this.state.nameValue, this.state.ageValue);
+      // alter the state of this component!!
       this.clearInputs();
     }
   }
 
   onFriendUpdate = () => {
     if (this.state.nameValue && this.state.ageValue) {
+      // alter the state of the app!!
       this.props.updateFriend(
         this.props.currentFriend.id,
         this.state.nameValue,
         this.state.ageValue,
       );
-      this.clearInputs();
+      // alter the state of the app!!
       this.props.setCurrentFriendId(null);
+      // alter the state of this component!!
+      this.clearInputs();
     }
   }
 
@@ -90,4 +95,4 @@ export class FriendAdder extends React.Component {
   }
 }
 
-export default FriendAdder;
+export default FriendEditor;
