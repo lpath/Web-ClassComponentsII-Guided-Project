@@ -4,6 +4,11 @@ import Friends from './Friends';
 import FriendEditor from './FriendEditor';
 
 
+const form = {
+  nameValue: '',
+  ageValue: '',
+};
+
 const initialState = {
   friends: [
     { id: uuid(), name: 'Tom', age: '35' },
@@ -11,22 +16,50 @@ const initialState = {
     { id: uuid(), name: 'Josh', age: '34' },
   ],
   currentFriendId: null,
+  form,
 };
 
 class Container extends React.Component {
   state = initialState
 
-  addFriend = (name, age) => {
-    this.setState(lastState => ({
-      friends: lastState.friends.concat({ id: uuid(), name, age }),
+  clearInputs = () => {
+    this.setState({ form });
+  }
+
+  onInputChange = (field, value) => {
+    this.setState(st => ({
+      form: {
+        ...st.form,
+        [field]: value,
+      },
     }));
   }
 
-  updateFriend = (id, name, age) => {
+  addFriend = () => {
     this.setState(lastState => ({
-      friends: lastState.friends.map(friend => {
-        if (friend.id === id) {
-          return { id, name, age };
+      friends: lastState.friends.concat(
+        {
+          id: uuid(),
+          name: lastState.form.nameValue,
+          age: lastState.form.ageValue,
+        },
+      ),
+      currentFriendId: null,
+      form,
+    }));
+  }
+
+  updateFriend = () => {
+    this.setState(st => ({
+      form,
+      currentFriendId: null,
+      friends: st.friends.map(friend => {
+        if (friend.id === st.currentFriendId) {
+          return {
+            id: st.currentFriendId,
+            name: st.form.nameValue,
+            age: st.form.ageValue,
+          };
         }
         return friend;
       }),
@@ -37,14 +70,24 @@ class Container extends React.Component {
     this.setState(prevState => ({
       friends: prevState.friends.filter(fr => fr.id !== id),
       currentFriendId: null,
+      form,
     }));
   }
 
   setCurrentFriendId = id => {
-    this.setState(
-      { currentFriendId: null },
-      () => this.setState({ currentFriendId: id }),
-    );
+    this.setState(st => {
+      const currentFriend = st.friends.find(
+        friend => id === friend.id,
+      );
+
+      return {
+        currentFriendId: id,
+        form: {
+          nameValue: currentFriend.name,
+          ageValue: currentFriend.age,
+        },
+      };
+    });
   }
 
   render() {
@@ -54,26 +97,23 @@ class Container extends React.Component {
 
     return (
       <div className='container'>
+        {
+          this.props.propsSoMeMagicalProp
+        }
         <Friends
           friends={this.state.friends}
           deleteFriend={this.deleteFriend}
           setCurrentFriendId={this.setCurrentFriendId}
         />
 
-        {
-          !this.state.currentFriendId &&
-          <FriendEditor
-            addFriend={this.addFriend}
-          />
-        }
-        {
-          this.state.currentFriendId &&
-          <FriendEditor
-            currentFriend={currentFriend}
-            updateFriend={this.updateFriend}
-            setCurrentFriendId={this.setCurrentFriendId}
-          />
-        }
+        <FriendEditor
+          form={this.state.form}
+          onInputChange={this.onInputChange}
+          addFriend={this.addFriend}
+          currentFriend={currentFriend}
+          updateFriend={this.updateFriend}
+          setCurrentFriendId={this.setCurrentFriendId}
+        />
       </div>
     );
   }
