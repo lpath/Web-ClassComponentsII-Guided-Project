@@ -107,7 +107,7 @@ class Container extends React.Component {
           form={this.state.form}
           onInputChange={this.onInputChange}
           addFriend={this.addFriend}
-          currentFriend={currentFriend}
+          isEditing={!!currentFriend}
           updateFriend={this.updateFriend}
           setCurrentFriendId={this.setCurrentFriendId}
         />

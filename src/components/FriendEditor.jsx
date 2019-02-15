@@ -3,13 +3,11 @@ import React from 'react';
 
 export default function FriendEditor({
   form,
-  currentFriend,
+  isEditing,
   onInputChange,
   addFriend,
   updateFriend,
 }) {
-  const isEditing = currentFriend;
-
   return (
     <div className='sub-container'>
       {
