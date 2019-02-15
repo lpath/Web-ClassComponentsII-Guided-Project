@@ -97,9 +97,6 @@ class Container extends React.Component {
 
     return (
       <div className='container'>
-        {
-          this.props.propsSoMeMagicalProp
-        }
         <Friends
           friends={this.state.friends}
           deleteFriend={this.deleteFriend}
