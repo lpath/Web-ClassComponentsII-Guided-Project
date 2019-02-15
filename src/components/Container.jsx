@@ -105,11 +105,10 @@ class Container extends React.Component {
 
         <FriendEditor
           form={this.state.form}
+          isEditing={!!currentFriend}
           onInputChange={this.onInputChange}
           addFriend={this.addFriend}
-          isEditing={!!currentFriend}
           updateFriend={this.updateFriend}
-          setCurrentFriendId={this.setCurrentFriendId}
         />
       </div>
     );
